@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>私の本棚</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="bookshelf-page">
+
+
+    <!-- =====================================================
+         ヘッダー
+    ====================================================== -->
+
+    <header class="shelf-header">
+
+        <h1>📚 私の本棚</h1>
+
+        <p class="book-count">
+            {{ books|length }}冊の本
+        </p>
+
+        <form
+            action="{{ url_for('check_new_books_route') }}"
+            method="POST"
+            class="new-books-check-form"
+        >
+
+            <button
+                type="submit"
+                class="new-books-check-button"
+            >
+                📚 新刊をチェックしてメールを送る
+            </button>
+
+        </form>
+
+    </header>
+
+
+    <!-- =====================================================
+         メイン
+    ====================================================== -->
+
+    <main class="main-layout">
+
+
+        <!-- =================================================
+             左側
+        ================================================== -->
+
+        <aside class="search-panel">
+
+
+            <!-- =================================================
+                 本を検索
+            ================================================== -->
+
+            <section class="search-section">
+
+                <h2>
+                    📖 本を検索
+                </h2>
+
+
+                <p class="search-description">
+                    楽天ブックスから本を探します。
+                </p>
+
+
+                <!-- =============================================
+                     検索フォーム
+                ============================================== -->
+
+                <form
+                    action="{{ url_for('search') }}"
+                    method="POST"
+                    class="search-form"
+                >
+
+                    <label>
+
+                        タイトル
+
+                        <input
+                            type="text"
+                            name="keyword"
+                            value="{{ search_keyword }}"
+                            placeholder="例：葬送のフリーレン"
+                        >
+
+                    </label>
+
+
+                    <label>
+
+                        ISBN
+
+                        <input
+                            type="text"
+                            name="isbn"
+                            value="{{ search_isbn }}"
+                            placeholder="例：9784098543465"
+                        >
+
+                    </label>
+
+
+                    <label>
+
+                        著者
+
+                        <input
+                            type="text"
+                            name="author"
+                            value="{{ search_author }}"
+                            placeholder="例：山田太郎"
+                        >
+
+                    </label>
+
+
+                    <button
+                        type="submit"
+                        class="search-button"
+                    >
+
+                        🔍 検索する
+
+                    </button>
+
+                </form>
+
+            </section>
+
+
+            <!-- =================================================
+                 本棚を整理
+            ================================================== -->
+
+            <section class="bookshelf-sort-section">
+
+                <div class="bookshelf-sort-title">
+
+                    <h2>
+                        🔎 本棚を整理
+                    </h2>
+
+                </div>
+
+
+                <form
+                    action="{{ url_for('index') }}"
+                    method="GET"
+                    class="bookshelf-filter"
+                >
+
+
+                    <!-- =========================================
+                         シリーズ
+                    ========================================== -->
+
+                    <label>
+
+                        シリーズ
+
+                        <select name="series">
+
+                            <option value="">
+                                すべて
+                            </option>
+
+                            {% for series in series_names %}
+
+                                <option
+                                    value="{{ series }}"
+                                    {% if selected_series == series %}
+                                    selected
+                                    {% endif %}
+                                >
+                                    {{ series }}
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </label>
+
+
+                    <!-- =========================================
+                         形態
+                    ========================================== -->
+
+                    <label>
+
+                        形態
+
+                        <select name="book_type">
+
+                            <option value="">
+                                すべて
+                            </option>
+
+                            {% for book_type in book_types %}
+
+                                <option
+                                    value="{{ book_type }}"
+                                    {% if selected_type == book_type %}
+                                    selected
+                                    {% endif %}
+                                >
+                                    {{ book_type }}
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </label>
+
+
+                    <!-- =========================================
+                         ジャンル
+                    ========================================== -->
+
+                    <label>
+
+                        ジャンル
+
+                        <select name="genre">
+
+                            <option value="">
+                                すべて
+                            </option>
+
+                            {% for genre in genres %}
+
+                                <option
+                                    value="{{ genre }}"
+                                    {% if selected_genre == genre %}
+                                    selected
+                                    {% endif %}
+                                >
+                                    {{ genre }}
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </label>
+
+
+                    <!-- =========================================
+                         並び順
+                    ========================================== -->
+
+                    <label>
+
+                        並び順
+
+                        <select name="sort">
+
+                            <option
+                                value="registered"
+                                {% if sort_order == "registered" %}
+                                selected
+                                {% endif %}
+                            >
+                                登録順
+                            </option>
+
+
+                            <option
+                                value="title"
+                                {% if sort_order == "title" %}
+                                selected
+                                {% endif %}
+                            >
+                                タイトル順
+                            </option>
+
+
+                            <option
+                                value="series"
+                                {% if sort_order == "series" %}
+                                selected
+                                {% endif %}
+                            >
+                                シリーズ順
+                            </option>
+
+
+                            <option
+                                value="type"
+                                {% if sort_order == "type" %}
+                                selected
+                                {% endif %}
+                            >
+                                形態順
+                            </option>
+
+
+                            <option
+                                value="genre"
+                                {% if sort_order == "genre" %}
+                                selected
+                                {% endif %}
+                            >
+                                ジャンル順
+                            </option>
+
+                        </select>
+
+                    </label>
+
+
+                    <!-- =========================================
+                         ボタン
+                    ========================================== -->
+
+                    <div class="filter-buttons">
+
+
+                        <button
+                            type="submit"
+                            class="search-button"
+                        >
+
+                            🔍 この条件で表示
+
+                        </button>
+
+
+                        <a
+                            href="{{ url_for('index') }}"
+                            class="filter-reset-button"
+                        >
+
+                            ↩ すべて表示
+
+                        </a>
+
+                    </div>
+
+
+                </form>
+
+            </section>
+
+
+            <!-- =================================================
+                 検索結果
+            ================================================== -->
+
+            {% if search_results %}
+
+                <section class="search-results">
+
+                    <h2>
+                        🔎 検索結果
+                    </h2>
+
+
+                    <p class="result-count">
+                        {{ search_results|length }}件
+                    </p>
+
+
+                    {% for result in search_results %}
+
+                        <div class="search-result">
+
+
+                            <!-- =================================
+                                 書影
+                            ================================== -->
+
+                            {% if result['cover_url'] %}
+
+                                <div class="result-cover">
+
+                                    <img
+                                        src="{{ result['cover_url'] }}"
+                                        alt="{{ result['title'] }}"
+                                    >
+
+                                </div>
+
+                            {% endif %}
+
+
+                            <!-- =================================
+                                 情報
+                            ================================== -->
+
+                            <div class="result-info">
+
+                                <h3>
+                                    {{ result['title'] }}
+                                </h3>
+
+
+                                {% if result['author'] %}
+
+                                    <p>
+                                        著者：
+                                        {{ result['author'] }}
+                                    </p>
+
+                                {% endif %}
+
+
+                                {% if result['publisher'] %}
+
+                                    <p>
+                                        出版社：
+                                        {{ result['publisher'] }}
+                                    </p>
+
+                                {% endif %}
+
+
+                                {% if result['isbn'] %}
+
+                                    <p>
+                                        ISBN：
+                                        {{ result['isbn'] }}
+                                    </p>
+
+                                {% endif %}
+
+
+                                {% if result['sales_date'] %}
+
+                                    <p>
+                                        発売日：
+                                        {{ result['sales_date'] }}
+                                    </p>
+
+                                {% endif %}
+
+
+                                {% if result['price'] %}
+
+                                    <p>
+                                        価格：
+                                        {{ result['price'] }}円
+                                    </p>
+
+                                {% endif %}
+
+
+                                <!-- =================================
+                                     本棚登録フォーム
+                                ================================== -->
+
+                                <form
+                                    action="{{ url_for('add') }}"
+                                    method="POST"
+                                    class="add-book-form"
+                                >
+
+                                    <input
+                                        type="hidden"
+                                        name="title"
+                                        value="{{ result['title'] }}"
+                                    >
+
+                                    <input
+                                        type="hidden"
+                                        name="author"
+                                        value="{{ result['author'] }}"
+                                    >
+
+                                    <input
+                                        type="hidden"
+                                        name="cover_url"
+                                        value="{{ result['cover_url'] }}"
+                                    >
+
+
+                                    <label>
+
+                                        シリーズ名
+
+                                        <input
+                                            type="text"
+                                            name="series_name"
+                                            placeholder="例：葬送のフリーレン"
+                                        >
+
+                                    </label>
+
+
+                                    <label>
+
+                                        形態
+
+                                        <select name="book_type">
+
+                                            <option value="">
+                                                選択してください
+                                            </option>
+
+                                            <option value="漫画">
+                                                漫画
+                                            </option>
+
+                                            <option value="小説">
+                                                小説
+                                            </option>
+
+                                            <option value="ライトノベル">
+                                                ライトノベル
+                                            </option>
+
+                                            <option value="エッセイ">
+                                                エッセイ
+                                            </option>
+
+                                            <option value="その他">
+                                                その他
+                                            </option>
+
+                                        </select>
+
+                                    </label>
+
+
+                                    <label>
+
+                                        ジャンル
+
+                                        <input
+                                            type="text"
+                                            name="genre"
+                                            placeholder="例：ファンタジー"
+                                        >
+
+                                    </label>
+
+
+                                    <label>
+
+                                        状態
+
+                                        <select name="status">
+
+                                            <option value="読みたい本">
+                                                読みたい本
+                                            </option>
+
+                                            <option value="読んだ本">
+                                                読んだ本
+                                            </option>
+
+                                        </select>
+
+                                    </label>
+
+
+                                    <button
+                                        type="submit"
+                                        class="add-book-button"
+                                    >
+
+                                        📚 本棚に追加
+
+                                    </button>
+
+                                </form>
+
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                </section>
+
+            {% endif %}
+
+
+            <!-- =================================================
+                 検索結果なし
+            ================================================== -->
+
+            {% if search_keyword or search_isbn or search_author %}
+
+                {% if not search_results %}
+
+                    <div class="no-results">
+
+                                                <p>
+                            検索結果がありませんでした。
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            {% endif %}
+
+
+        </aside>
+
+
+        <!-- =================================================
+             右側：本棚
+        ================================================== -->
+
+        <section class="bookshelf-area">
+
+
+            <!-- =================================================
+                 本棚タイトル
+            ================================================== -->
+
+            <div class="bookshelf-title">
+
+                <h2>
+                    📚 本棚
+                </h2>
+
+            </div>
+
+
+            <!-- =================================================
+                 本棚
+            ================================================== -->
+
+            {% if books %}
+
+                <div class="book-list">
+
+                    {% for book in books %}
+
+                        <a
+                            href="{{ url_for('book_detail', book_id=book['id']) }}"
+                            class="book"
+                        >
+
+                            <div class="book-spine">
+
+                                <div class="book-title">
+
+                                    {{ book['title'] }}
+
+                                </div>
+
+                            </div>
+
+                        </a>
+
+                    {% endfor %}
+
+                </div>
+
+
+            {% else %}
+
+                <div class="empty-bookshelf">
+
+                    <p>
+                        条件に一致する本がありません。
+                    </p>
+
+                    <p class="empty-sub">
+                        絞り込み条件を変更してください。
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         フッター
+    ====================================================== -->
+
+    <footer class="shelf-footer">
+
+        <p>
+            My Bookshelf
+        </p>
+
+    </footer>
+
+
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1275 @@
+/* =========================================================
+   全体
+========================================================= */
+
+body {
+    margin: 0;
+
+    font-family:
+        "Yu Gothic",
+        "Hiragino Kaku Gothic ProN",
+        Meiryo,
+        sans-serif;
+
+    color: #3f3025;
+
+    background:
+        linear-gradient(
+            rgba(92, 63, 38, 0.08),
+            rgba(92, 63, 38, 0.08)
+        ),
+        repeating-linear-gradient(
+            0deg,
+            #e8dcc8 0px,
+            #e8dcc8 3px,
+            #e2d2b9 4px,
+            #eadfce 7px,
+            #dfceb3 9px
+        );
+
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   本棚ページ全体
+========================================================= */
+
+.bookshelf-page {
+    width: 94%;
+    max-width: 1500px;
+
+    margin: 0 auto;
+
+    padding: 30px 20px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   ヘッダー
+========================================================= */
+
+.shelf-header {
+    margin-bottom: 25px;
+
+    text-align: center;
+}
+
+
+.shelf-header h1 {
+    color: #4a3424;
+
+    margin: 0 0 8px;
+
+    text-shadow:
+        1px 1px 0 #f4eadb;
+}
+
+
+.book-count {
+    margin: 0;
+
+    color: #705039;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   左：検索　右：本棚
+========================================================= */
+
+.main-layout {
+    display: grid;
+
+    grid-template-columns:
+        320px
+        minmax(0, 1fr);
+
+    gap: 30px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   左側：検索パネル
+========================================================= */
+
+.search-panel {
+    box-sizing: border-box;
+
+    width: 100%;
+
+    padding: 25px;
+
+    background:
+        rgba(255, 250, 242, 0.95);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 5px 18px rgba(60, 35, 15, 0.18);
+}
+
+
+.search-panel h2 {
+    margin-top: 0;
+
+    margin-bottom: 10px;
+
+    color: #4a3424;
+
+    font-size: 21px;
+}
+
+
+.search-description {
+    margin-top: 0;
+
+    margin-bottom: 20px;
+
+    color: #777;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   検索フォーム
+========================================================= */
+
+.search-form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+.search-form label {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+    color: #705039;
+
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+
+.search-form input {
+    box-sizing: border-box;
+
+    width: 100%;
+
+    padding: 10px;
+
+    border: 1px solid #c8b49b;
+
+    border-radius: 6px;
+
+    background: #fffdf9;
+
+    color: #3f3025;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    outline: none;
+}
+
+
+.search-form input:focus {
+    border-color: #8d6a4b;
+
+    box-shadow:
+        0 0 0 2px rgba(112, 80, 57, 0.12);
+}
+
+
+/* =========================================================
+   検索ボタン
+========================================================= */
+
+.search-button {
+    width: 100%;
+
+    margin-top: 5px;
+
+    padding: 11px 18px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #705039;
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+
+.search-button:hover {
+    background: #593b29;
+}
+
+
+/* =========================================================
+   検索結果
+========================================================= */
+
+.search-results {
+    margin-top: 30px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #d5c4ad;
+}
+
+
+.search-results h2 {
+    margin-bottom: 5px;
+
+    font-size: 19px;
+}
+
+
+.result-count {
+    margin-top: 0;
+
+    margin-bottom: 15px;
+
+    color: #777;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   検索結果1冊
+========================================================= */
+
+.search-result {
+    display: flex;
+
+    gap: 12px;
+
+    margin-bottom: 15px;
+
+    padding: 12px;
+
+    box-sizing: border-box;
+
+    background: #fffdf9;
+
+    border: 1px solid #d8c8b4;
+
+    border-radius: 7px;
+}
+
+
+/* =========================================================
+   検索結果の書影
+========================================================= */
+
+.result-cover {
+    flex: 0 0 55px;
+
+    width: 55px;
+}
+
+
+.result-cover img {
+    display: block;
+
+    width: 55px;
+
+    max-height: 85px;
+
+    object-fit: cover;
+
+    border-radius: 3px;
+
+    box-shadow:
+        1px 2px 5px rgba(50, 30, 15, 0.2);
+}
+
+
+/* =========================================================
+   検索結果の情報
+========================================================= */
+
+.result-info {
+    min-width: 0;
+
+    flex: 1;
+}
+
+
+.result-info h3 {
+    margin: 0 0 8px;
+
+    color: #4a3424;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+
+.result-info p {
+    margin: 4px 0;
+
+    color: #665548;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   本棚に追加
+========================================================= */
+
+.add-book-button {
+    width: 100%;
+
+    margin-top: 9px;
+
+    padding: 8px 10px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #705039;
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+
+.add-book-button:hover {
+    background: #593b29;
+}
+
+
+/* =========================================================
+   検索結果なし
+========================================================= */
+
+.no-results {
+    margin-top: 25px;
+
+    padding: 15px;
+
+    background: #fffdf9;
+
+    border: 1px solid #d8c8b4;
+
+    border-radius: 7px;
+
+    color: #777;
+
+    font-size: 13px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   右側：本棚エリア
+========================================================= */
+
+.bookshelf-area {
+    min-width: 0;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+
+    background:
+        rgba(255, 250, 242, 0.55);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 14px rgba(60, 35, 15, 0.10);
+}
+
+
+/* =========================================================
+   本棚タイトル
+========================================================= */
+
+.bookshelf-title {
+    margin-bottom: 25px;
+}
+
+
+.bookshelf-title h2 {
+    margin: 0;
+
+    color: #4a3424;
+
+    font-size: 22px;
+
+    text-shadow:
+        1px 1px 0 #f4eadb;
+}
+
+
+/* =========================================================
+   本の並び
+========================================================= */
+
+.book-list {
+    display: flex;
+
+    flex-direction: row;
+
+    flex-wrap: wrap;
+
+    align-items: flex-end;
+
+    justify-content: flex-start;
+
+    gap: 25px 12px;
+
+    width: 100%;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   本
+========================================================= */
+
+.book {
+    position: relative;
+
+    flex: 0 0 90px;
+
+    width: 90px;
+
+    height: 220px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            90deg,
+            #3e241b 0%,
+            #704536 8%,
+            #855545 45%,
+            #633b30 90%,
+            #3b2119 100%
+        );
+
+    border-radius: 3px 6px 6px 3px;
+
+    box-shadow:
+        inset 3px 0 0 rgba(255,255,255,0.12),
+        inset -4px 0 0 rgba(0,0,0,0.18),
+        4px 5px 8px rgba(50, 30, 15, 0.35);
+
+    text-decoration: none;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+/* =========================================================
+   本の上部・下部の装飾
+========================================================= */
+
+.book::before {
+    content: "";
+
+    position: absolute;
+
+    top: 8px;
+
+    left: 5px;
+
+    right: 5px;
+
+    height: 2px;
+
+    background:
+        rgba(245, 220, 180, 0.45);
+
+    box-shadow:
+        0 202px 0 rgba(245, 220, 180, 0.35);
+}
+
+
+/* =========================================================
+   本の背の中央装飾
+========================================================= */
+
+.book::after {
+    content: "";
+
+    position: absolute;
+
+    top: 20px;
+
+    bottom: 20px;
+
+    left: 8px;
+
+    width: 2px;
+
+    background:
+        rgba(255, 225, 190, 0.25);
+}
+
+
+/* =========================================================
+   マウスを乗せたとき
+========================================================= */
+
+.book:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        inset 3px 0 0 rgba(255,255,255,0.12),
+        inset -4px 0 0 rgba(0,0,0,0.18),
+        5px 10px 14px rgba(50, 30, 15, 0.45);
+}
+
+
+/* =========================================================
+   本の背表紙タイトル
+========================================================= */
+
+.book-title {
+    position: relative;
+
+    z-index: 2;
+
+    box-sizing: border-box;
+
+    width: 100%;
+
+    height: 100%;
+
+    padding: 14px 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #fff8ed;
+
+    writing-mode: vertical-rl;
+
+    text-orientation: mixed;
+
+    font-size: 13px;
+
+    line-height: 1.3;
+
+    letter-spacing: 0.5px;
+
+    text-decoration: none;
+
+    white-space: normal;
+
+    word-break: break-all;
+
+    overflow-wrap: anywhere;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   本の背表紙内部
+========================================================= */
+
+.book-spine {
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   本棚が空の場合
+========================================================= */
+
+.empty-bookshelf {
+    padding: 60px 20px;
+
+    text-align: center;
+
+    color: #665548;
+
+    background:
+        rgba(255, 253, 249, 0.65);
+
+    border-radius: 8px;
+}
+
+
+.empty-bookshelf p {
+    margin: 5px;
+}
+
+
+.empty-sub {
+    color: #999;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   フッター
+========================================================= */
+
+.shelf-footer {
+    margin-top: 30px;
+
+    text-align: center;
+
+    color: #806d5b;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   詳細ページ
+========================================================= */
+
+.detail-page {
+    width: 90%;
+
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    padding: 30px 20px;
+}
+
+
+/* =========================================================
+   詳細ページ上部
+========================================================= */
+
+.detail-header {
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   本棚に戻る
+========================================================= */
+
+.back-button {
+    display: inline-block;
+
+    padding: 9px 16px;
+
+    background: #705039;
+
+    color: white;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+}
+
+
+.back-button:hover {
+    background: #593b29;
+}
+
+
+/* =========================================================
+   詳細カード
+========================================================= */
+
+.book-detail-card {
+    background:
+        rgba(255, 250, 242, 0.95);
+
+    border-radius: 12px;
+
+    padding: 35px;
+
+    box-shadow:
+        0 5px 18px rgba(60, 35, 15, 0.18);
+}
+
+
+/* =========================================================
+   書影＋情報
+========================================================= */
+
+.detail-main {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 30px;
+}
+
+
+/* =========================================================
+   書影
+========================================================= */
+
+.detail-cover {
+    flex-shrink: 0;
+
+    width: 180px;
+}
+
+
+.detail-cover img {
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+    border-radius: 4px;
+
+    box-shadow:
+        2px 4px 8px rgba(50, 30, 15, 0.25);
+}
+
+
+/* =========================================================
+   詳細情報
+========================================================= */
+
+.detail-info {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.detail-title {
+    margin-top: 0;
+
+    margin-bottom: 25px;
+
+    color: #4a3424;
+
+    writing-mode: horizontal-tb;
+
+    overflow-wrap: anywhere;
+}
+
+
+.detail-row {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    margin-bottom: 10px;
+
+    padding: 10px 12px;
+
+    background: #fffdf9;
+
+    border: 1px solid #e1d4c3;
+
+    border-radius: 6px;
+
+    box-sizing: border-box;
+
+    writing-mode: horizontal-tb;
+}
+
+
+
+.detail-label {
+    width: 80px;
+
+    flex-shrink: 0;
+
+    font-weight: bold;
+
+    color: #705039;
+}
+
+
+.detail-value {
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   コメント
+========================================================= */
+
+.comment-section {
+    margin-top: 35px;
+
+    writing-mode: horizontal-tb;
+}
+
+
+.comment-section h2 {
+    font-size: 20px;
+
+    color: #4a3424;
+}
+
+
+.comment-box {
+    width: 100%;
+
+    min-height: 80px;
+
+    box-sizing: border-box;
+
+    padding: 14px;
+
+    background: #fffdf9;
+
+    border: 1px solid #c8b49b;
+
+    border-radius: 6px;
+
+    white-space: pre-wrap;
+
+    overflow-wrap: anywhere;
+
+    writing-mode: horizontal-tb;
+}
+
+
+.empty-comment {
+    color: #999;
+}
+
+
+/* =========================================================
+   詳細ページのボタン
+========================================================= */
+
+.detail-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-top: 25px;
+
+    writing-mode: horizontal-tb;
+}
+
+
+.edit-button {
+    display: inline-block;
+
+    padding: 10px 20px;
+
+    background: #705039;
+
+    color: white;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+}
+
+
+.edit-button:hover {
+    background: #593b29;
+}
+
+
+/* =========================================================
+   訂正フォーム
+========================================================= */
+
+.edit-section {
+    margin-top: 35px;
+
+    padding: 30px;
+
+    background:
+        rgba(255, 250, 242, 0.95);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 12px rgba(60, 35, 15, 0.12);
+
+    writing-mode: horizontal-tb;
+}
+
+
+.edit-form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+.edit-form label {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+    font-weight: bold;
+}
+
+
+.edit-form input,
+.edit-form select,
+.edit-form textarea {
+    box-sizing: border-box;
+
+    width: 100%;
+
+    padding: 10px;
+
+    border: 1px solid #c8b49b;
+
+    border-radius: 6px;
+
+    background: #fffdf9;
+
+    font-family: inherit;
+
+    font-size: 15px;
+}
+
+
+.edit-form textarea {
+    resize: vertical;
+}
+
+
+/* =========================================================
+   保存ボタン
+========================================================= */
+
+.save-button {
+    align-self: flex-end;
+
+    padding: 11px 22px;
+
+    background: #705039;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+
+.save-button:hover {
+    background: #593b29;
+}
+
+
+/* =========================================================
+   削除エリア
+========================================================= */
+
+.danger-zone {
+    margin-top: 80px;
+
+    padding: 25px;
+    border-top: 2px solid #c9a39d;
+
+    text-align: right;
+
+    writing-mode: horizontal-tb;
+}
+
+
+.danger-zone h2 {
+    color: #8b4038;
+
+    font-size: 18px;
+}
+
+
+.danger-zone p {
+    color: #777;
+}
+
+
+.danger-delete-button {
+    padding: 10px 20px;
+
+    background: #9b4b42;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+
+.danger-delete-button:hover {
+    background: #7d3932;
+}
+
+
+/* =========================================================
+   スマホ
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .main-layout {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+
+    .search-panel {
+        width: 100%;
+    }
+
+
+    .bookshelf-area {
+        padding: 20px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .bookshelf-page {
+        width: 96%;
+
+        padding: 20px 10px;
+    }
+
+
+    .book {
+        flex-basis: 75px;
+
+        width: 75px;
+
+        height: 190px;
+    }
+
+
+    .book-title {
+        font-size: 12px;
+
+        padding: 10px 6px;
+    }
+
+
+    .detail-main {
+        flex-direction: column;
+    }
+
+
+    .detail-cover {
+        width: 150px;
+
+        margin: 0 auto;
+    }
+
+
+    .detail-row {
+        flex-direction: column;
+
+        gap: 4px;
+    }
+
+
+    .detail-label {
+        width: auto;
+    }
+
+}
+/* =========================================================
+   新刊チェックボタン
+========================================================= */
+
+.new-books-check-form {
+    margin-top: 15px;
+
+    text-align: center;
+}
+
+
+.new-books-check-button {
+    padding: 10px 18px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #705039;
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+
+.new-books-check-button:hover {
+    background: #593b29;
+}
+/* =========================================================
+   本棚を整理（HTMLの class="bookshelf-filter" に完全に適合）
+========================================================= */
+
+.bookshelf-filter {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #d5c4ad;
+
+    /* フォーム全体を縦の箇条書きの並びにする */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* 各項目の上下の間隔 */
+}
+
+/* 「シリーズ」「形態」「ジャンル」「並び順」の文字とセレクトを縦並びにする */
+.bookshelf-filter label {
+    display: flex;
+    flex-direction: column; /* 上から下に並べる設定 */
+    gap: 6px;               /* 「シリーズ」と「選択してください」の隙間 */
+    color: #705039;
+    font-size: 13px;
+    font-weight: bold;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* セレクトボックスの見た目を綺麗にする */
+.bookshelf-filter select {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 9px;
+    border: 1px solid #c8b49b;
+    border-radius: 6px;
+    background: #fffdf9;
+    color: #3f3025;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* セレクトボックス選択時の見た目 */
+.bookshelf-filter select:focus {
+    outline: none;
+    border-color: #8d6a4b;
+    box-shadow: 0 0 0 2px rgba(112, 80, 57, 0.12);
+}
+
+/* =========================================================
+   本棚整理ボタン（「この条件で表示」ボタン）
+========================================================= */
+
+.bookshelf-filter .add-book-button {
+    margin-top: 5px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #705039;
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.bookshelf-filter .add-book-button:hover {
+    background: #593b29;
+}
+
+/* =========================================================
+   すべて表示（リセットボタン・リンク）
+========================================================= */
+
+.filter-reset-button {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 9px 10px;
+    border-radius: 6px;
+    background: #e2d2bd;
+    color: #5f4938;
+    font-size: 13px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.filter-reset-button:hover {
+    background: #d5c2aa;
+}
+
