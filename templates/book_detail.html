@@ -125,6 +125,24 @@
 
                     {% endif %}
 
+                    <!-- 巻数 -->
+
+                    {% if book['volume'] %}
+
+                        <div class="detail-row">
+
+                            <span class="detail-label">
+                                巻数
+                            </span>
+
+                            <span class="detail-value">
+                                {{ book['volume'] }}巻
+                            </span>
+
+                        </div>
+
+                    {% endif %}
+
 
                     <!-- 形態 -->
 
@@ -305,6 +323,23 @@
                     >
 
                 </label>
+
+                <!-- 巻数 -->
+
+                <label>
+
+                    巻数
+
+                    <input
+                        type="number"
+                        name="volume"
+                        value="{{ book['volume'] or '' }}"
+                        min="1"
+                        placeholder="例：12"
+                    >
+
+                </label>
+
 
 
                 <!-- 形態 -->

@@ -197,7 +197,7 @@ def extract_volume(title):
 
     # タイトルから括弧で囲まれた数字（全角・半角）を探すパターン
     # 例: 「葬送のフリーレン（12）」から 12 を見つける
-    match = re.search(r'[（\(\[\【]([0-9０-９]+)[）\)\重\】]', title)
+    match = re.search(r'[（\(\[【]([0-9０-９]+)[）\)\]】]', title)
     if match:
         # 見つかった数字を半角の整数(int)に変換して返す
         vol_str = match.group(1)
@@ -654,7 +654,8 @@ def get_book(book_id):
             genre,
             status,
             comment,
-            cover_url
+            cover_url,
+            volume
         FROM books
         WHERE id = ?
     """, (
@@ -678,8 +679,10 @@ def add_book(
     genre="",
     status="読みたい本",
     comment="",
-    cover_url=""
+    cover_url="",
+    volume=None
 ):
+
 
     conn = sqlite3.connect(
         DB_PATH
@@ -694,9 +697,10 @@ def add_book(
             genre,
             status,
             comment,
-            cover_url
+            cover_url,
+            volume
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         title,
         author,
@@ -705,7 +709,8 @@ def add_book(
         genre,
         status,
         comment,
-        cover_url
+        cover_url,
+        volume
     ))
 
     conn.commit()
@@ -746,7 +751,8 @@ def update_book(
     genre,
     status,
     comment,
-    cover_url
+    cover_url,
+    volume
 ):
 
     conn = sqlite3.connect(
@@ -763,7 +769,8 @@ def update_book(
             genre = ?,
             status = ?,
             comment = ?,
-            cover_url = ?
+            cover_url = ?,
+            volume = ?
         WHERE id = ?
     """, (
         title,
@@ -774,12 +781,14 @@ def update_book(
         status,
         comment,
         cover_url,
+        volume,
         book_id
     ))
 
     conn.commit()
 
     conn.close()
+
 
 
 # =========================================================
@@ -1222,8 +1231,19 @@ def add():
         ""
     ).strip()
 
-    if title:
+    # -----------------------------------------------------
+    # タイトルから巻数を自動取得
+    # -----------------------------------------------------
 
+    volume = extract_volume(
+        title
+    )
+
+
+    # タイトルから巻数を自動取得
+    volume = extract_volume(title)
+
+    if title:
         add_book(
             title=title,
             author=author,
@@ -1232,7 +1252,8 @@ def add():
             genre=genre,
             status=status,
             comment=comment,
-            cover_url=cover_url
+            cover_url=cover_url,
+            volume=volume
         )
 
     return redirect(
@@ -1316,6 +1337,17 @@ def edit_book(book_id):
         ""
     ).strip()
 
+    volume_text = request.form.get(
+        "volume",
+        ""
+    ).strip()
+
+    try:
+        volume = int(volume_text) if volume_text else None
+    except ValueError:
+        volume = None
+
+
     if title:
 
         update_book(
@@ -1327,7 +1359,8 @@ def edit_book(book_id):
             genre,
             status,
             comment,
-            cover_url
+            cover_url,
+            volume
         )
 
     return redirect(
