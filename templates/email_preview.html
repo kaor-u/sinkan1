@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>メール送信結果</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="email-preview-page">
+
+
+    <!-- =====================================================
+         ヘッダー
+    ====================================================== -->
+
+    <header class="email-preview-header">
+
+        {% if success %}
+
+            <div class="email-success-icon">
+                ✉️
+            </div>
+
+            <h1>
+                メールを送信しました
+            </h1>
+
+            <p>
+                新刊チェックの結果をメールで送信しました。
+            </p>
+
+        {% else %}
+
+            <div class="email-success-icon">
+                ⚠️
+            </div>
+
+            <h1>
+                メール送信結果
+            </h1>
+
+            <p>
+                {{ message }}
+            </p>
+
+        {% endif %}
+
+    </header>
+
+
+    <!-- =====================================================
+         メール
+    ====================================================== -->
+
+    <main class="email-preview-card">
+
+
+        <div class="email-window-header">
+
+            <span class="email-dot red"></span>
+            <span class="email-dot yellow"></span>
+            <span class="email-dot green"></span>
+
+            <span class="email-window-title">
+                メール
+            </span>
+
+        </div>
+
+
+        <div class="email-content">
+
+            
+            <!-- =============================================
+                 件名
+            ============================================== -->
+
+            <div class="email-row">
+
+                <span class="email-label">
+                    件名
+                </span>
+
+                <span class="email-value email-subject">
+                    {{ email_subject }}
+                </span>
+
+            </div>
+
+
+            <div class="email-divider"></div>
+
+
+            <!-- =============================================
+                 本文
+            ============================================== -->
+
+            <div class="email-body">
+
+                {{ email_body }}
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         戻る
+    ====================================================== -->
+
+    <div class="email-preview-actions">
+
+        <a
+            href="{{ url_for('index') }}"
+            class="back-button"
+        >
+            📚 本棚に戻る
+        </a>
+
+    </div>
+
+
+</div>
+
+</body>
+
+</html>

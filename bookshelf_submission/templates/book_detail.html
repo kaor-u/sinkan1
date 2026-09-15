@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ book['title'] }} - 私の本棚</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="detail-page">
+
+
+    <!-- =====================================================
+         上部
+    ====================================================== -->
+
+    <header class="detail-header">
+
+        <a
+            href="{{ url_for('index') }}"
+            class="back-button"
+        >
+            ← 本棚に戻る
+        </a>
+
+    </header>
+
+
+    <!-- =====================================================
+         本の詳細
+    ====================================================== -->
+
+    <main class="book-detail">
+
+
+        <div class="book-detail-card">
+
+
+            <!-- =================================================
+                 書影＋基本情報
+            ================================================== -->
+
+            <div class="detail-main">
+
+
+                <!-- -------------------------------------------------
+                     書影
+                -------------------------------------------------- -->
+
+                {% if book['cover_url'] %}
+
+                    <div class="detail-cover">
+
+                        <img
+                            src="{{ book['cover_url'] }}"
+                            alt="{{ book['title'] }}の書影"
+                        >
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- -------------------------------------------------
+                     本の情報
+                -------------------------------------------------- -->
+
+                <div class="detail-info">
+
+
+                    <!-- タイトル -->
+
+                    <h1 class="detail-title">
+
+                        {{ book['title'] }}
+
+                    </h1>
+
+
+                    <!-- 著者 -->
+
+                    {% if book['author'] %}
+
+                        <div class="detail-row">
+
+                            <span class="detail-label">
+                                著者
+                            </span>
+
+                            <span class="detail-value">
+                                {{ book['author'] }}
+                            </span>
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- シリーズ -->
+
+                    {% if book['series_name'] %}
+
+                        <div class="detail-row">
+
+                            <span class="detail-label">
+                                シリーズ
+                            </span>
+
+                            <span class="detail-value">
+                                {{ book['series_name'] }}
+                            </span>
+
+                        </div>
+
+                    {% endif %}
+
+                    <!-- 巻数 -->
+
+                    {% if book['volume'] %}
+
+                        <div class="detail-row">
+
+                            <span class="detail-label">
+                                巻数
+                            </span>
+
+                            <span class="detail-value">
+                                {{ book['volume'] }}巻
+                            </span>
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- 形態 -->
+
+                    {% if book['book_type'] %}
+
+                        <div class="detail-row">
+
+                            <span class="detail-label">
+                                形態
+                            </span>
+
+                            <span class="detail-value">
+                                {{ book['book_type'] }}
+                            </span>
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- ジャンル -->
+
+                    {% if book['genre'] %}
+
+                        <div class="detail-row">
+
+                            <span class="detail-label">
+                                ジャンル
+                            </span>
+
+                            <span class="detail-value">
+                                {{ book['genre'] }}
+                            </span>
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- 状態 -->
+
+                    {% if book['status'] %}
+
+                        <div class="detail-row">
+
+                            <span class="detail-label">
+                                状態
+                            </span>
+
+                            <span class="detail-value">
+                                {{ book['status'] }}
+                            </span>
+
+                        </div>
+
+                    {% endif %}
+
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 コメント
+            ================================================== -->
+
+            <div class="comment-section">
+
+                <h2>
+                    自分用コメント
+                </h2>
+
+
+                {% if book['comment'] %}
+
+                    <div class="comment-box">
+
+                        {{ book['comment'] }}
+
+                    </div>
+
+                {% else %}
+
+                    <div class="comment-box empty-comment">
+
+                        コメントはまだありません。
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- =================================================
+                 訂正ボタン
+            ================================================== -->
+
+            <div class="detail-actions">
+
+                <a
+                    href="#edit"
+                    class="edit-button"
+                >
+                    ✏️ 訂正する
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =====================================================
+             訂正フォーム
+        ====================================================== -->
+
+        <section
+            id="edit"
+            class="edit-section"
+        >
+
+            <h2>
+                ✏️ 本の情報を訂正
+            </h2>
+
+
+            <form
+                action="{{ url_for('edit_book', book_id=book['id']) }}"
+                method="POST"
+                class="edit-form"
+            >
+
+
+                <!-- タイトル -->
+
+                <label>
+
+                    タイトル
+
+                    <input
+                        type="text"
+                        name="title"
+                        value="{{ book['title'] }}"
+                        required
+                    >
+
+                </label>
+
+
+                <!-- 著者 -->
+
+                <label>
+
+                    著者
+
+                    <input
+                        type="text"
+                        name="author"
+                        value="{{ book['author'] or '' }}"
+                    >
+
+                </label>
+
+
+                <!-- シリーズ -->
+
+                <label>
+
+                    シリーズ名
+
+                    <input
+                        type="text"
+                        name="series_name"
+                        value="{{ book['series_name'] or '' }}"
+                        placeholder="例：葬送のフリーレン"
+                    >
+
+                </label>
+
+                <!-- 巻数 -->
+
+                <label>
+
+                    巻数
+
+                    <input
+                        type="number"
+                        name="volume"
+                        value="{{ book['volume'] or '' }}"
+                        min="1"
+                        placeholder="例：12"
+                    >
+
+                </label>
+
+
+
+                <!-- 形態 -->
+
+                <label>
+
+                    形態
+
+                    <select name="book_type">
+
+                        <option
+                            value=""
+                            {% if not book['book_type'] %}
+                            selected
+                            {% endif %}
+                        >
+                            選択してください
+                        </option>
+
+
+                        <option
+                            value="漫画"
+                            {% if book['book_type'] == '漫画' %}
+                            selected
+                            {% endif %}
+                        >
+                            漫画
+                        </option>
+
+
+                        <option
+                            value="小説"
+                            {% if book['book_type'] == '小説' %}
+                            selected
+                            {% endif %}
+                        >
+                            小説
+                        </option>
+
+
+                        <option
+                            value="ライトノベル"
+                            {% if book['book_type'] == 'ライトノベル' %}
+                            selected
+                            {% endif %}
+                        >
+                            ライトノベル
+                        </option>
+
+
+                        <option
+                            value="エッセイ"
+                            {% if book['book_type'] == 'エッセイ' %}
+                            selected
+                            {% endif %}
+                        >
+                            エッセイ
+                        </option>
+
+
+                        <option
+                            value="その他"
+                            {% if book['book_type'] == 'その他' %}
+                            selected
+                            {% endif %}
+                        >
+                            その他
+                        </option>
+
+                    </select>
+
+                </label>
+
+
+                <!-- ジャンル -->
+
+                <label>
+
+                    ジャンル
+
+                    <input
+                        type="text"
+                        name="genre"
+                        value="{{ book['genre'] or '' }}"
+                        placeholder="例：ファンタジー"
+                    >
+
+                </label>
+
+
+                <!-- 状態 -->
+
+                <label>
+
+                    状態
+
+                    <select name="status">
+
+                        <option
+                            value="読みたい本"
+                            {% if book['status'] == '読みたい本' %}
+                            selected
+                            {% endif %}
+                        >
+                            読みたい本
+                        </option>
+
+
+                        <option
+                            value="読んだ本"
+                            {% if book['status'] == '読んだ本' %}
+                            selected
+                            {% endif %}
+                        >
+                            読んだ本
+                        </option>
+
+                    </select>
+
+                </label>
+
+
+                <!-- コメント -->
+
+                <label>
+
+                    自分用コメント
+
+                    <textarea
+                        name="comment"
+                        rows="5"
+                        placeholder="この本についてのメモなど"
+                    >{{ book['comment'] or '' }}</textarea>
+
+                </label>
+
+
+                <!-- 書影URL -->
+
+                <label>
+
+                    書影URL
+
+                    <input
+                        type="text"
+                        name="cover_url"
+                        value="{{ book['cover_url'] or '' }}"
+                        placeholder="書影を表示する場合のみ入力"
+                    >
+
+                </label>
+
+
+                <!-- 保存 -->
+
+                <button
+                    type="submit"
+                    class="save-button"
+                >
+
+                    💾 訂正内容を保存
+
+                </button>
+
+
+            </form>
+
+        </section>
+
+
+        <!-- =====================================================
+             削除
+        ====================================================== -->
+
+        <section class="danger-zone">
+
+            <h2>
+                ⚠️ 本の削除
+            </h2>
+
+
+            <p>
+                この本を本棚から削除します。
+            </p>
+
+
+            <form
+                action="{{ url_for('remove_book', book_id=book['id']) }}"
+                method="POST"
+                onsubmit="return confirm('本当にこの本を削除しますか？');"
+            >
+
+                <button
+                    type="submit"
+                    class="danger-delete-button"
+                >
+
+                    🗑️ この本を削除する
+
+                </button>
+
+            </form>
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+</body>
+
+</html>
