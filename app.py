@@ -425,7 +425,8 @@ def get_books(
             genre,
             status,
             comment,
-            cover_url
+            cover_url,
+            volume
         FROM books
         WHERE 1 = 1
     """
@@ -501,7 +502,56 @@ def get_books(
                 title COLLATE NOCASE ASC
         """
 
+
+    elif sort_order == "volume":
+
+        query += """
+
+            ORDER BY
+
+                CASE
+
+                    WHEN series_name IS NULL
+
+                         OR TRIM(series_name) = ''
+
+                    THEN 1
+
+                    ELSE 0
+
+                END,
+
+                series_name COLLATE NOCASE ASC,
+
+                CASE
+
+                    WHEN volume IS NULL THEN 1
+
+                    ELSE 0
+
+                END,
+
+                volume ASC,
+
+                title COLLATE NOCASE ASC
+
+        """
+
+
+
     elif sort_order == "series":
+
+        query += """
+
+            ORDER BY
+
+                series_name COLLATE NOCASE ASC,
+
+                volume ASC,
+
+                title COLLATE NOCASE ASC
+
+        """
 
         # -------------------------------------------------
         # シリーズ順は後でPython側で処理する

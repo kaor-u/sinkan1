@@ -6,9 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b3f64c8b-9532-4c26-ad11-452af541fd80" name="変更" comment="初回">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/新しいフォルダー (6).iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/新しいフォルダー (6).iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/books.db" beforeDir="false" afterPath="$PROJECT_DIR$/books.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/book_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/book_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,16 +27,16 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "kaor-u"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;kaor-u&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/kaor-u/sinkanSearch.git",
-    "accountId": "5ffa8c93-2b67-4cb5-8ca3-5298ad7ed838"
+    "accountId": "bca3ca53-a330-4569-b138-8f4c89b1a4c0"
   }
 }]]></component>
   <component name="HighlightingSettingsPerFile">
@@ -63,9 +64,13 @@
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "master",
     "last_opened_file_path": "E:/新しいフォルダー (6)",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "settings.editor.selected.configurable": "editing.templates"
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -76,7 +81,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-eff1e8def5f5-5bd6d13a2a75-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-262.10315.174" />
+        <option value="bundled-python-sdk-84eaadda3698-c2ffad84badb-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.27258.51" />
       </set>
     </attachedChunks>
   </component>
