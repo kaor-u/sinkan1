@@ -4,12 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3f64c8b-9532-4c26-ad11-452af541fd80" name="変更" comment="9/15 自分用">
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/email_preview.html" afterDir="false" />
+    <list default="true" id="b3f64c8b-9532-4c26-ad11-452af541fd80" name="変更" comment="9/17 提出用">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/books.db" beforeDir="false" afterPath="$PROJECT_DIR$/books.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookshelf_submission.zip" beforeDir="false" afterPath="$PROJECT_DIR$/bookshelf_submission.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookshelf_submission/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookshelf_submission/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookshelf_submission/templates/book_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/bookshelf_submission/templates/book_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookshelf_submission/templates/email_preview.html" beforeDir="false" afterPath="$PROJECT_DIR$/bookshelf_submission/templates/email_preview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookshelf_submission/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/bookshelf_submission/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/book_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/book_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/email_preview.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/email_preview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,12 +39,12 @@
     &quot;assignee&quot;: &quot;kaor-u&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/user07-practice/sinkan1.git",
-    "accountId": "bca3ca53-a330-4569-b138-8f4c89b1a4c0"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/user07-practice/sinkan1.git&quot;,
+    &quot;accountId&quot;: &quot;bca3ca53-a330-4569-b138-8f4c89b1a4c0&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/app.py" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -72,7 +78,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+    "settings.editor.selected.configurable": "vcs.Git"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -147,7 +153,15 @@
       <option name="project" value="LOCAL" />
       <updated>1789446276823</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="9/15 提出用">
+      <option name="closed" value="true" />
+      <created>1789458174568</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1789458174568</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,6 +170,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="初回" />
     <MESSAGE value="9/15 自分用" />
-    <option name="LAST_COMMIT_MESSAGE" value="9/15 自分用" />
+    <MESSAGE value="9/15 提出用" />
+    <MESSAGE value="9/17 提出用" />
+    <option name="LAST_COMMIT_MESSAGE" value="9/17 提出用" />
   </component>
 </project>

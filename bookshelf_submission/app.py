@@ -2,11 +2,10 @@ import os
 import sqlite3
 import requests
 import re
-
 from datetime import datetime, timedelta
 
-from email.mime.text import MIMEText
-from email.utils import formatdate
+from flask import Flask, render_template, request, redirect, url_for
+
 
 from flask import (
     Flask,
@@ -23,7 +22,34 @@ from pykakasi import kakasi
 # Flask
 # =========================================================
 
-app = Flask(__name__)
+# 環境変数「FLASK_ENV」が production（本番）かどうかを判定します。
+# 何も設定されていなければ開発環境（手元）として動作します。
+IS_PRODUCTION = os.environ.get("FLASK_ENV") == "production"
+SUBPATH = "my-app"  # 実際のサブパス名
+
+if IS_PRODUCTION:
+    # 【本番環境】サブパスを考慮したパス設定で起動します
+    app = Flask(
+        __name__,
+        static_url_path=f'/{SUBPATH}/static'
+    )
+
+
+    # 独自のミドルウェアで、すべての url_for の前に自動でサブパスを付与します
+    class ProductionSubpathMiddleware(object):
+        def __init__(self, app, subpath):
+            self.app = app
+            self.subpath = subpath.strip('/')
+
+        def __call__(self, environ, start_response):
+            environ['SCRIPT_NAME'] = '/' + self.subpath
+            return self.app(environ, start_response)
+
+
+    app.wsgi_app = ProductionSubpathMiddleware(app.wsgi_app, SUBPATH)
+else:
+    # 【開発環境（PC手元）】通常通り起動します
+    app = Flask(__name__)
 
 
 # =========================================================
